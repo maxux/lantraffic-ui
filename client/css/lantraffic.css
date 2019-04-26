@@ -1,0 +1,63 @@
+html, body {
+    height: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+    html, body {
+        overflow: hidden;
+    }
+}
+
+body {
+    padding: 15px;
+}
+
+.glyphicon-text {
+    padding-right: 6px;
+}
+
+.glyphicon-small {
+    font-size: 10px;
+}
+
+/* devices */
+table.devices {
+    font-size: 14px;
+    font-family: monospace;
+    table-layout: fixed;
+}
+
+table.devices td:nth-child(1) {
+    width: 12em;
+}
+
+table.devices td:nth-child(3), table.devices td:nth-child(4) {
+    width: 8em;
+}
+
+table.devices td:nth-child(5) {
+    width: 9em;
+}
+
+table.devices .inactive {
+    opacity: 0.3;
+}
+
+/* badge extended */
+.badge-danger {
+    background-color: #B90B00;
+    color: #FFFFFF;
+}
+
+.badge-warning {
+    background-color: #C87406;
+}
+
+#disconnected {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    color: #A52A2A;
+    font-weight: bold;
+    animation: blinker 1s linear infinite;
+}
