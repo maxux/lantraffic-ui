@@ -31,11 +31,15 @@ table.devices td:nth-child(1) {
     width: 12em;
 }
 
-table.devices td:nth-child(3), table.devices td:nth-child(4) {
+table.devices td:nth-child(2) {
+    width: 10em;
+}
+
+table.devices td:nth-child(4), table.devices td:nth-child(5) {
     width: 8em;
 }
 
-table.devices td:nth-child(5) {
+table.devices td:nth-child(6) {
     width: 9em;
 }
 

@@ -105,6 +105,7 @@ function devices_update(clients) {
         var tx = (client['tx'] != undefined) ? client['tx'] : null;
 
         var tr = $('<tr>');
+        tr.append($('<td>').html(client['mac-address']));
         tr.append($('<td>').html(client['ip-address']));
         tr.append($('<td>').html(client['hostname']));
         tr.append($('<td>', {'class': rxtxactive(rx)})
