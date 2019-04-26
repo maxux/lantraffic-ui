@@ -71,7 +71,7 @@ class LanTrafficServer():
         loop.set_debug(True)
 
         # handle websocket communication
-        websocketd = websockets.serve(self.handler, "0.0.0.0", 55574)
+        websocketd = websockets.serve(self.handler, "192.168.20.1", 55574)
         asyncio.ensure_future(websocketd, loop=loop)
         asyncio.ensure_future(self.redisloop(), loop=loop)
 
