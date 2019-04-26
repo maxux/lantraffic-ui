@@ -62,6 +62,9 @@ class LanTrafficServer():
                     "tx": live['tx'],
                 }
 
+                if live['addr'] == live['host']:
+                    self.clients[live['addr']]['hostname'] = '(unknown)'
+
             await self.wsbroadcast(self.clients)
             await asyncio.sleep(1)
 
