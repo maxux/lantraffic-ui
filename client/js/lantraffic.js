@@ -31,7 +31,7 @@ function shortrate(value) {
 var socket;
 
 function connect() {
-    socket = new WebSocket("ws://10.241.0.254:55574/");
+    socket = new WebSocket("ws://192.168.20.1:55574/");
 
     socket.onopen = function() {
         console.log("websocket open");
