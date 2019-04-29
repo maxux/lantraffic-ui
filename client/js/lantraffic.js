@@ -101,6 +101,7 @@ function devices_update(clients) {
     for(var index in oclients) {
         var client = clients[oclients[index]['mac']];
         var elapsed = (now.getTime() / 1000) - client['timestamp'];
+        var hostname = client['hostname'] ? client['hostname'] : "(unknown)";
         var rx = (client['rx'] != undefined) ? client['rx'] : null;
         var tx = (client['tx'] != undefined) ? client['tx'] : null;
         var hostclass = (!client['hostname']) ? {'class': 'text-muted darker'} : {};
