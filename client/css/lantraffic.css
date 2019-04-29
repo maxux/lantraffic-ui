@@ -43,6 +43,10 @@ table.devices td:nth-child(6) {
     width: 9em;
 }
 
+table.devices .inactive {
+    opacity: 0.3;
+}
+
 table.devices .offline {
     opacity: 0.5;
 }

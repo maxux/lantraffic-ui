@@ -53,6 +53,9 @@ class LanTrafficServer():
                 if live['active'] < time.time() - (4 * 3600):
                     continue
 
+                if 'host' not in live or live['host'] == live['addr']:
+                    live['host'] = None
+
                 self.clients[live['addr']] = {
                     "timestamp": live['active'],
                     "mac-address": live['macaddr'],
