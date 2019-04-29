@@ -43,7 +43,11 @@ table.devices td:nth-child(6) {
     width: 9em;
 }
 
-table.devices .inactive {
+table.devices .offline {
+    opacity: 0.5;
+}
+
+.darker {
     opacity: 0.3;
 }
 
@@ -51,10 +55,6 @@ table.devices .inactive {
 .badge-danger {
     background-color: #B90B00;
     color: #FFFFFF;
-}
-
-.badge-warning {
-    background-color: #C87406;
 }
 
 #disconnected {

@@ -103,11 +103,13 @@ function devices_update(clients) {
         var elapsed = (now.getTime() / 1000) - client['timestamp'];
         var rx = (client['rx'] != undefined) ? client['rx'] : null;
         var tx = (client['tx'] != undefined) ? client['tx'] : null;
+        var hostclass = (!client['hostname']) ? {'class': 'text-muted darker'} : {};
+        var trclass = (elapsed > 3600) ? {'class': 'offline'} : {}; // 1h offline
 
-        var tr = $('<tr>');
+        var tr = $('<tr>', trclass);
         tr.append($('<td>').html(client['mac-address']));
         tr.append($('<td>').html(client['ip-address']));
-        tr.append($('<td>').html(client['hostname']));
+        tr.append($('<td>', hostclass).html(hostname));
         tr.append($('<td>', {'class': rxtxactive(rx)})
             .append($('<span>', {'class': rxtxclass(rx) + ' badge'}).html(downarrow + shortrate(rx)))
         );
