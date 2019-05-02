@@ -2,12 +2,6 @@ html, body {
     height: 100%;
 }
 
-@media screen and (min-width: 1000px) {
-    html, body {
-        overflow: hidden;
-    }
-}
-
 body {
     padding: 15px;
 }
