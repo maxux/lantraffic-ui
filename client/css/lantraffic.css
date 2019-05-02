@@ -29,11 +29,18 @@ table.devices td:nth-child(2) {
     width: 10em;
 }
 
-table.devices td:nth-child(4), table.devices td:nth-child(5) {
+/* rx rate, tx-rate */
+table.devices td:nth-child(4), table.devices td:nth-child(6) {
     width: 8em;
 }
 
-table.devices td:nth-child(6) {
+/* total rx, total tx */
+table.devices td:nth-child(5), table.devices td:nth-child(7) {
+    width: 8em;
+}
+
+
+table.devices td:nth-child(8) {
     width: 9em;
 }
 

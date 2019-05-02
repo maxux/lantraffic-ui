@@ -1,4 +1,6 @@
 var shortrates  = ['b', 'K', 'M', 'G', 'T', 'P'];
+var hideclients = 1;
+var lastdata = {};
 
 function elapsedstr(elapsed) {
     if(elapsed < 60)
@@ -40,6 +42,7 @@ function connect() {
 
     socket.onmessage = function(msg) {
         json = JSON.parse(msg.data);
+        lastdata = json;
         devices_update(json);
     }
 
@@ -91,8 +94,10 @@ function devices_update(clients) {
     var total = {
         'clients': 0,
         'actives': 0,
+        'rx-rate': 0,
+        'tx-rate': 0,
         'rx': 0,
-        'tx': 0
+        'tx': 0,
     };
 
     var downarrow = '<span class="glyphicon glyphicon-small glyphicon-arrow-down"></span> ';
@@ -110,30 +115,46 @@ function devices_update(clients) {
         var hostname = client['hostname'] ? client['hostname'] : "(unknown)";
         var rx = (client['rx'] != undefined) ? client['rx'] : null;
         var tx = (client['tx'] != undefined) ? client['tx'] : null;
+        var totalrx = (client['total-rx'] != undefined) ? client['total-rx'] : 0;
+        var totaltx = (client['total-tx'] != undefined) ? client['total-tx'] : 0;
         var hostclass = (!client['hostname']) ? {'class': 'text-muted darker'} : {};
         var trclass = {};
 
         if(elapsed > 600) {
             // 10 min of inactivity
-            trclass = 'offline';
+            trclass = {'class': 'offline'};
 
         } else {
             total['actives'] += 1;
         }
 
-        total['rx'] += rx;
-        total['tx'] += tx;
+        total['rx-rate'] += rx;
+        total['tx-rate'] += tx;
+        total['rx'] += totalrx;
+        total['tx'] += totaltx;
         total['clients'] += 1;
+
+        // hide shortly inactive clients
+        if(elapsed > 3600 && hideclients)
+            continue;
 
         var tr = $('<tr>', trclass);
         tr.append($('<td>').html(client['mac-address']));
         tr.append($('<td>').html(client['ip-address']));
         tr.append($('<td>', hostclass).html(hostname));
+
         tr.append($('<td>', {'class': rxtxactive(rx)})
             .append($('<span>', {'class': rxtxclass(rx) + ' badge'}).html(downarrow + shortrate(rx)))
         );
+        tr.append($('<td>').append(
+            $('<span>', {'class': 'inactive badge'}).html(shortrate(totalrx)))
+        );
+
         tr.append($('<td>', {'class': rxtxactive(tx)})
             .append($('<span>', {'class': rxtxclass(tx) + ' badge'}).html(uparrow + shortrate(tx)))
+        );
+        tr.append($('<td>').append(
+            $('<span>', {'class': 'inactive badge'}).html(shortrate(totaltx)))
         );
 
         var badgeclass = 'badge pull-right';
@@ -148,8 +169,16 @@ function devices_update(clients) {
     // total
     $("#total-clients").html(total['clients']);
     $("#total-clients-actives").html(total['actives']);
-    $("#total-rx-rate").html(shortrate(total['rx']));
-    $("#total-tx-rate").html(shortrate(total['tx']));
+    $("#total-rx-rate").html(shortrate(total['rx-rate']));
+    $("#total-tx-rate").html(shortrate(total['tx-rate']));
+    $("#total-rx").html(shortrate(total['rx']));
+    $("#total-tx").html(shortrate(total['tx']));
+}
+
+function toggleclients() {
+    hideclients = (hideclients) ? 0 : 1;
+    devices_update(lastdata);
+    return false;
 }
 
 $(document).ready(function() {
