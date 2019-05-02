@@ -45,6 +45,18 @@ table.devices .offline {
     opacity: 0.5;
 }
 
+.pannel-summary {
+    font-size: 2.4em;
+}
+
+.pannel-summary-multi {
+    font-size: 1.6em;
+}
+
+#total-rx, #total-tx {
+    font-size: 0.5em;
+}
+
 .darker {
     opacity: 0.3;
 }
@@ -56,7 +68,7 @@ table.devices .offline {
 }
 
 .badge-warning {
-    background-color: #D8A50E;
+    background-color: #01A972;
     color: #FFFFFF;
 }
 

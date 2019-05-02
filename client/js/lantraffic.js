@@ -88,6 +88,12 @@ function devices_update(clients) {
     $('.devices').empty();
 
     var now = new Date();
+    var total = {
+        'clients': 0,
+        'actives': 0,
+        'rx': 0,
+        'tx': 0
+    };
 
     var downarrow = '<span class="glyphicon glyphicon-small glyphicon-arrow-down"></span> ';
     var uparrow = '<span class="glyphicon glyphicon-small glyphicon-arrow-up"></span> ';
@@ -105,7 +111,19 @@ function devices_update(clients) {
         var rx = (client['rx'] != undefined) ? client['rx'] : null;
         var tx = (client['tx'] != undefined) ? client['tx'] : null;
         var hostclass = (!client['hostname']) ? {'class': 'text-muted darker'} : {};
-        var trclass = (elapsed > 3600) ? {'class': 'offline'} : {}; // 1h offline
+        var trclass = {};
+
+        if(elapsed > 600) {
+            // 10 min of inactivity
+            trclass = 'offline';
+
+        } else {
+            total['actives'] += 1;
+        }
+
+        total['rx'] += rx;
+        total['tx'] += tx;
+        total['clients'] += 1;
 
         var tr = $('<tr>', trclass);
         tr.append($('<td>').html(client['mac-address']));
@@ -126,6 +144,12 @@ function devices_update(clients) {
 
         $('.devices').append(tr);
     }
+
+    // total
+    $("#total-clients").html(total['clients']);
+    $("#total-clients-actives").html(total['actives']);
+    $("#total-rx-rate").html(shortrate(total['rx']));
+    $("#total-tx-rate").html(shortrate(total['tx']));
 }
 
 $(document).ready(function() {
