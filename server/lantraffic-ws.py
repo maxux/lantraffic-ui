@@ -70,7 +70,7 @@ class LanTrafficServer():
                     "rx": live['rx'],
                     "tx": live['tx'],
                     "total-rx": live['total-rx'],
-                    "ttoal-tx": live['total-tx'],
+                    "total-tx": live['total-tx'],
                 }
 
                 if live['addr'] == live['host']:
