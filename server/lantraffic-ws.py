@@ -56,6 +56,12 @@ class LanTrafficServer():
                 if 'host' not in live or live['host'] == live['addr']:
                     live['host'] = None
 
+                if 'total-rx' not in live:
+                    live['total-rx'] = 0
+
+                if 'total-tx' not in live:
+                    live['total-tx'] = 0
+
                 self.clients[live['addr']] = {
                     "timestamp": live['active'],
                     "mac-address": live['macaddr'],
@@ -63,6 +69,8 @@ class LanTrafficServer():
                     "ip-address": live['addr'],
                     "rx": live['rx'],
                     "tx": live['tx'],
+                    "total-rx": live['total-rx'],
+                    "ttoal-tx": live['total-tx'],
                 }
 
                 if live['addr'] == live['host']:
