@@ -55,6 +55,11 @@ table.devices .offline {
     color: #FFFFFF;
 }
 
+.badge-warning {
+    background-color: #FFC107;
+    color: #FFFFFF;
+}
+
 #disconnected {
     position: absolute;
     bottom: 5px;
